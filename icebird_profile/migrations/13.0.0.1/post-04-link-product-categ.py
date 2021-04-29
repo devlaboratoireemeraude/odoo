@@ -30,17 +30,92 @@ def migrate(cr, v):
                 categories = env['product.category'].search([])
                 for categ in categories:
                     categ.write({'name':categ.name.strip() })
-
+                new_categories = env['product.category'].search([])
+                # if row and row[column_names.index('Catégorie')] != '':
+                #     for new_categ in new_categories:
+                #         path_category = row[column_names.index('Catégorie')].strip()                      
+                #         search_anomalie = env['product.category'].search([]).filtered(lambda c: c.display_name == path_category)
+                #         if not search_anomalie:
+                #             import pdb; pdb.set_trace()
                 if row:
                     product_template = env['product.template'].search([
                         ('name', '=',row[column_names.index('Nom')] )
                     ])
                     if product_template:
+                        print(row[column_names.index('default_code')])
                         list_catgories = row[column_names.index('Catégorie')].split('/')
-                        product_category = env['product.category'].search([
-                            ('name', '=', list_catgories[-1].strip()),
-                            ('parent_id.name', '=', list_catgories[-2].strip())
-                        ], limit=1)
+                        if len(list_catgories) == 1:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                            ])
+                        if len(list_catgories) == 2:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                                ('parent_id.name', '=', list_catgories[-2].strip()), 
+                            ])
+                        if len(list_catgories) == 3:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                                ('parent_id.name', '=', list_catgories[-2].strip()), 
+                                ('parent_id.parent_id.name', '=', list_catgories[-3].strip()),
+                            ])
+                        if len(list_catgories) == 4:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                                ('parent_id.name', '=', list_catgories[-2].strip()), 
+                                ('parent_id.parent_id.name', '=', list_catgories[-3].strip()),
+                                ('parent_id.parent_id.parent_id.name', '=', list_catgories[-4].strip()),
+                            ])
+                        if len(list_catgories) == 5:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                                ('parent_id.name', '=', list_catgories[-2].strip()), 
+                                ('parent_id.parent_id.name', '=', list_catgories[-3].strip()),
+                                ('parent_id.parent_id.parent_id.name', '=', list_catgories[-4].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-5].strip()),
+                            ])
+                        if len(list_catgories) == 6:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                                ('parent_id.name', '=', list_catgories[-2].strip()), 
+                                ('parent_id.parent_id.name', '=', list_catgories[-3].strip()),
+                                ('parent_id.parent_id.parent_id.name', '=', list_catgories[-4].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-5].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-6].strip()),
+                            ])
+                        if len(list_catgories) == 7:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                                ('parent_id.name', '=', list_catgories[-2].strip()),
+                                ('parent_id.parent_id.name', '=', list_catgories[-3].strip()),
+                                ('parent_id.parent_id.parent_id.name', '=', list_catgories[-4].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-5].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-6].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-7].strip()),
+                            ])
+                        if len(list_catgories) == 8:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                                ('parent_id.name', '=', list_catgories[-2].strip()),
+                                ('parent_id.parent_id.name', '=', list_catgories[-3].strip()),
+                                ('parent_id.parent_id.parent_id.name', '=', list_catgories[-4].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-5].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-6].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-7].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-8].strip()),
+                            ])
+                        if len(list_catgories) == 9:
+                            product_category = env['product.category'].search([
+                                ('name', '=', list_catgories[-1].strip()),
+                                ('parent_id.name', '=', list_catgories[-2].strip()),
+                                ('parent_id.parent_id.name', '=', list_catgories[-3].strip()),
+                                ('parent_id.parent_id.parent_id.name', '=', list_catgories[-4].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-5].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-6].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-7].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-8].strip()),
+                                ('parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.parent_id.name', '=', list_catgories[-9].strip()),
+                            ])
                         if product_category:
                             product_template.write({
                                 'categ_id': product_category.id
