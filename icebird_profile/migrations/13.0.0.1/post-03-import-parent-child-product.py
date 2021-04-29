@@ -26,79 +26,80 @@ def migrate(cr, v):
             column_names = next(reader)
             for row in reader:
                 if row[column_names.index('Parents')]:
-                    search_categ = env['product.category'].search([
+                    ParentCateg = env['product.category'].search([
                         ('name', '=', row[column_names.index('Parents')]),
                     ])
-                    if not search_categ:
+                    if not ParentCateg:
                         ParentCateg = env['product.category'].create({
                             'name':row[column_names.index('Parents')],
-                            'parent_id': env.ref('product.product_category_1').id,
+                            'parent_id': env.ref('product.product_category_all').id,
                         })
                 if row[column_names.index('child1')]:
-                    search_categ = env['product.category'].search([
-                        ('name', '=', row[column_names.index('child1')])
+                    Parent2Categ = env['product.category'].search([
+                        ('name', '=', row[column_names.index('child1')]),
+                        ('parent_id', '=', ParentCateg.id)
                     ])
-                    if not search_categ:
+                    if not Parent2Categ:
                         Parent2Categ = env['product.category'].create({
                             'name':row[column_names.index('child1')],
                             'parent_id':ParentCateg.id
                         })
                 if row[column_names.index('child2')]:
-                    search_categ = env['product.category'].search([
+                    Parent3Categ = env['product.category'].search([
                         ('name', '=', row[column_names.index('child2')]),
                         ('parent_id', '=', Parent2Categ.id)
                     ])
-                    if not search_categ:
+                    if not Parent3Categ:
                         Parent3Categ = env['product.category'].create({
                             'name':row[column_names.index('child2')],
                             'parent_id':Parent2Categ.id
                         })
                 if row[column_names.index('child3')]:
-                    search_categ = env['product.category'].search([
+                    Parent4Categ = env['product.category'].search([
                         ('name', '=', row[column_names.index('child3')]),
                         ('parent_id', '=', Parent3Categ.id)
                     ])
-                    if not search_categ:
+                    if not Parent4Categ:
                         Parent4Categ = env['product.category'].create({
                             'name':row[column_names.index('child3')],
                             'parent_id':Parent3Categ.id
                         })
                 if row[column_names.index('child4')]:
-                    search_categ = env['product.category'].search([
+                    Parent5Categ = env['product.category'].search([
                         ('name', '=', row[column_names.index('child4')]),
                         ('parent_id', '=', Parent4Categ.id)
                     ])
-                    if not search_categ:
+                    if not Parent5Categ:
                         Parent5Categ = env['product.category'].create({
                             'name':row[column_names.index('child4')],
                             'parent_id':Parent4Categ.id
                         })
                 if row[column_names.index('child5')]:
-                    search_categ = env['product.category'].search([
+                    Parent6Categ = env['product.category'].search([
                         ('name', '=', row[column_names.index('child5')]),
                         ('parent_id', '=', Parent5Categ.id)
                     ])
-                    if not search_categ:
+                    if not Parent6Categ:
                         Parent6Categ = env['product.category'].create({
                             'name':row[column_names.index('child5')],
                             'parent_id':Parent5Categ.id
                         })
                 if row[column_names.index('child6')]:
-                    search_categ = env['product.category'].search([
+                    Parent7Categ = env['product.category'].search([
                         ('name', '=', row[column_names.index('child6')]),
                         ('parent_id', '=', Parent6Categ.id)
                     ])
-                    if not search_categ:
+                    if not Parent7Categ:
                         Parent7Categ = env['product.category'].create({
                             'name':row[column_names.index('child6')],
                             'parent_id':Parent6Categ.id
                         })
                 if row[column_names.index('child7')]:
-                    search_categ = env['product.category'].search([
+                    Parent8Categ = env['product.category'].search([
                         ('name', '=', row[column_names.index('child7')]),
                         ('parent_id', '=', Parent7Categ.id)
                     ])
-                    if not search_categ:
+                    if not Parent8Categ:
                         Parent8Categ = env['product.category'].create({
                             'name':row[column_names.index('child7')],
                             'parent_id':Parent7Categ.id
