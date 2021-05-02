@@ -13,6 +13,7 @@ from odoo import models, fields
 
 class ProductTags(models.Model):
     _name = 'product.tags'
+    _description = 'Product Tag'
 
     name = fields.Char(string="Tag Name", required="1")
 
