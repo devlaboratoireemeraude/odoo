@@ -8,6 +8,7 @@ import csv
 import logging
 logger = logging.getLogger()
 from os import path
+import re
 
 
 
@@ -32,6 +33,11 @@ def migrate(cr, v):
                         standard_price = float(row[column_names.index('Coût')].replace(',', '.'))
                     else:
                         standard_price = 0
+                    if row[column_names.index('volume')] != '':
+                        nb =  re.findall('\d+', row[column_names.index('volume')])[0];
+                        volume = int(nb) / 1000
+                    else:
+                        volume = 0 
                     vals.append({
                         'default_code':row[column_names.index('default_code')],
                         'name':row[column_names.index('Nom')],
@@ -40,7 +46,7 @@ def migrate(cr, v):
                         'type': 'product',
                         'standard_price':standard_price,
                         'external_ref':row[column_names.index('Référence externe')],
-                        # 'volume':row[column_names.index('volume')],
+                        'volume':volume,
                     })
             if vals:
                 env['product.template'].create(vals)
