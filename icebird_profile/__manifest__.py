@@ -17,7 +17,7 @@
     # Categories can be used to filter modules in modules listing
     # for the full list
     'category': 'Customize',
-    'version': '13.0.0.2',
+    'version': '13.0.0.0',
 
     # any module necessary for this one to work correctly
     'depends': ['base','sale_management','contacts', 'stock', 'purchase'],
