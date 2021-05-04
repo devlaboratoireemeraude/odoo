@@ -44,6 +44,7 @@ def migrate(cr, v):
                     if product_template:
                         print(row[column_names.index('default_code')])
                         list_catgories = row[column_names.index('Catégorie')].split('/')
+                        print(list_catgories)
                         if len(list_catgories) == 1:
                             product_category = env['product.category'].search([
                                 ('name', '=', list_catgories[-1].strip()),

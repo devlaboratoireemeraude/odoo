@@ -36,7 +36,6 @@ def migrate(cr, v):
                     product_template_id = env['product.template'].search([
                         ('name', '=', row[column_names.index('Nom')])
                     ], limit=1).id
-                    print(row[column_names.index('default_code')])
                     res_partner = env['res.partner'].search([
                         ('name', '=', row[column_names.index('Fournisseur')].strip())
                     ],limit=1)
