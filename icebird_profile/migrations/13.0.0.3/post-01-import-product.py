@@ -18,15 +18,15 @@ def migrate(cr, v):
 
         logger.info('Import products')
 
-        for product in env['product.template'].search([('type', '=', 'product')]):
+        categ_ids = env['product.category'].search([('name', '=', 'Produits finis')])
+        for product in env['product.template'].search([('type', '=', 'product'),('categ_id', 'in', categ_ids.ids)]):
             new_product = product.copy()
-            barcode = product.barcode
             product.barcode = None
-            new_product.write({
-                'name': product.name,
-                'default_code': product.default_code,
-                'barcode': barcode
-            })
+            new_product = product.copy()
+            product.barcode = None
+            new_product.name = product.name
+            new_product.default_code = product.default_code
+            new_product.barcode = product.barcode
             try:
                 product.action_archive()
             except:
