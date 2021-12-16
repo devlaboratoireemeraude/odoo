@@ -26,7 +26,6 @@ def migrate(cr, v):
             new_product.default_code = product.default_code
             new_product.barcode = product.barcode
             env.cr.commit()
-            print(new_product.name)
             try:
                 product.action_archive()
             except:
