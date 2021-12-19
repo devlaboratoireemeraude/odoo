@@ -19,7 +19,7 @@ def migrate(cr, v):
         logger.info('Import products')
 
         for product in env['product.template'].search([]):
-            if product.default_code and product.default_code[0:2] == 'PF':
+            if product.default_code and not product.default_code[0:2] == 'PF':
                 product_name = product.name
                 new_product = product.copy(default={'name': product_name})
                 product.barcode = None
